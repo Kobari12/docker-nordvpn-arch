@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  srv:
+    build: .
+    container_name: arch-vpn-srv
+    volumes:
+      - ~/share:/home/container/share
+    sysctls:
+      net.ipv4.conf.all.rp_filter: 2
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    devices:
+      - "/dev/net/tun"
+    tty: true
+    command: sudo nordvpnd
